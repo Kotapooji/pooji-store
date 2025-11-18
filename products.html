@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Pooji Store — Products</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --brown:#5b3a29;
+      --beige:#f3ead6;
+      --gold:#c59d5f;
+      --card:#fff8ef;
+      --shadow:0 8px 30px rgba(91,58,41,0.12);
+    }
+    body{
+      margin:0;
+      font-family:Inter, sans-serif;
+      background:var(--beige);
+      color:var(--brown);
+    }
+    header{
+      display:flex;justify-content:space-between;align-items:center;padding:20px 40px;background:var(--beige);position:sticky;top:0;z-index:10;
+      box-shadow:0 4px 10px rgba(0,0,0,0.05);
+    }
+    h1{
+      font-family:'Playfair Display',serif;
+      font-size:38px;margin:20px 0;text-align:center;
+    }
+    nav a{margin-left:18px;text-decoration:none;color:var(--brown);font-weight:600}
+
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+      gap:20px;
+      padding:40px;
+    }
+    .card{
+      background:linear-gradient(180deg,#fff,#fff9f1);
+      border-radius:18px;
+      box-shadow:var(--shadow);
+      overflow:hidden;
+      transition:0.2s;
+    }
+    .card:hover{transform:scale(1.02)}
+    .card img{width:100%;height:260px;object-fit:cover}
+    .info{padding:16px}
+    .title{font-family:'Playfair Display',serif;font-size:18px;font-weight:700}
+    .price{font-weight:700;color:var(--gold);margin-top:6px}
+    .desc{font-size:14px;color:#6e584b;margin-top:6px}
+
+    .back{
+      margin:30px auto;text-align:center;
+    }
+    .btn{
+      padding:10px 18px;background:var(--gold);color:white;border-radius:10px;text-decoration:none;font-weight:600;
+      box-shadow:0 8px 18px rgba(197,157,95,0.3);
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div style="font-weight:700;font-size:20px;display:flex;align-items:center;gap:10px">
+    <div style="width:45px;height:45px;border-radius:10px;background:var(--brown);display:grid;place-items:center;color:var(--beige);font-family:'Playfair Display',serif;font-size:18px">PS</div>
+    Pooji Store
+  </div>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="#">Products</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
+
+<h1>Our Featured Products</h1>
+
+<div class="grid">
+  <div class="card">
+    <img src="https://images.unsplash.com/photo-1512820790803-83ca734da794?q=80&w=1200" alt="Fiction Books">
+    <div class="info">
+      <div class="title">Fiction Collection</div>
+      <div class="price">₹299 onwards</div>
+      <div class="desc">Handpicked modern stories & relaxing reads.</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <img src="https://images.unsplash.com/photo-1473862170188-3ec7d31b0311?q=80&w=1200" alt="Classics">
+    <div class="info">
+      <div class="title">Classic Literature</div>
+      <div class="price">₹199 onwards</div>
+      <div class="desc">Timeless tales from Austen, Dickens & more.</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <img src="https://images.unsplash.com/photo-1507842217343-583bb7270b66?q=80&w=1200" alt="Reading Nook">
+    <div class="info">
+      <div class="title">Cozy Reads</div>
+      <div class="price">₹249 onwards</div>
+      <div class="desc">Warm, comforting books for peaceful evenings.</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <img src="https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?q=80&w=1200" alt="Book Cafe">
+    <div class="info">
+      <div class="title">Book Café Specials</div>
+      <div class="price">₹349 onwards</div>
+      <div class="desc">Books paired with a café experience.</div>
+    </div>
+  </div>
+</div>
+
+<div class="back">
+  <a href="index.html" class="btn">⬅ Back to Home</a>
+</div>
+
+</body>
+</html>
