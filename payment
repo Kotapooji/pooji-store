@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pooji Store — Payment</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --brown:#5b3a29;
+      --beige:#f3ead6;
+      --gold:#c59d5f;
+      --shadow:0 8px 30px rgba(91,58,41,0.12);
+    }
+
+    body{
+      margin:0;
+      font-family:Inter, sans-serif;
+      background:var(--beige);
+      color:var(--brown);
+    }
+
+    header{
+      display:flex;justify-content:space-between;align-items:center;padding:20px 40px;
+      background:var(--beige);
+      position:sticky;top:0;z-index:100;
+      box-shadow:0 4px 10px rgba(0,0,0,0.05);
+    }
+
+    nav a{
+      margin-left:18px;
+      text-decoration:none;
+      color:var(--brown);
+      font-weight:600;
+    }
+
+    h1{
+      font-family:'Playfair Display', serif;
+      text-align:center;
+      font-size:40px;
+      margin-top:30px;
+    }
+
+    .container{
+      width:90%;
+      max-width:700px;
+      background:white;
+      padding:30px;
+      margin:30px auto;
+      border-radius:20px;
+      box-shadow:var(--shadow);
+    }
+
+    .field{
+      margin-bottom:20px;
+    }
+
+    label{
+      font-weight:600;
+      display:block;
+      margin-bottom:6px;
+    }
+
+    input{
+      width:100%;
+      padding:12px;
+      border-radius:12px;
+      border:1px solid #c8b4a4;
+      font-size:15px;
+      outline:none;
+    }
+
+    input:focus{
+      border-color:var(--gold);
+      box-shadow:0 0 6px rgba(197,157,95,0.4);
+    }
+
+    .pay-btn{
+      width:100%;
+      background:var(--gold);
+      color:white;
+      padding:15px;
+      border:none;
+      border-radius:12px;
+      font-size:18px;
+      font-weight:600;
+      margin-top:10px;
+      cursor:pointer;
+      box-shadow:0 10px 22px rgba(197,157,95,0.35);
+    }
+
+    .pay-btn:hover{
+      opacity:0.9;
+    }
+
+    .payment-img{
+      width:100%;
+      border-radius:16px;
+      margin-bottom:20px;
+      box-shadow:var(--shadow);
+    }
+
+    .back{
+      text-align:center;
+      margin:20px;
+    }
+    .back a{
+      text-decoration:none;
+      padding:10px 18px;
+      background:var(--brown);
+      color:white;
+      border-radius:10px;
+      font-weight:600;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div style="display:flex;align-items:center;gap:10px;font-size:20px;font-weight:700;">
+    <div style="width:45px;height:45px;border-radius:10px;background:var(--brown);color:var(--beige);display:grid;place-items:center;font-family:'Playfair Display',serif;">PS</div>
+    Pooji Store
+  </div>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="products.html">Products</a>
+    <a href="#">Help</a>
+  </nav>
+</header>
+
+<h1>Checkout & Payment</h1>
+
+<div class="container">
+  <img class="payment-img" src="https://images.unsplash.com/photo-1607082349566-187342175e2f?q=80&w=1200" alt="Payment aesthetic">
+
+  <div class="field">
+    <label>Full Name</label>
+    <input type="text" placeholder="Enter your name" />
+  </div>
+
+  <div class="field">
+    <label>Email Address</label>
+    <input type="email" placeholder="Enter your email" />
+  </div>
+
+  <div class="field">
+    <label>Card Number</label>
+    <input type="text" placeholder="XXXX XXXX XXXX XXXX" />
+  </div>
+
+  <div class="field" style="display:flex;gap:20px;">
+    <div style="flex:1;">
+      <label>Expiry Date</label>
+      <input type="text" placeholder="MM/YY" />
+    </div>
+
+    <div style="flex:1;">
+      <label>CVV</label>
+      <input type="password" placeholder="***" />
+    </div>
+  </div>
+
+  <button class="pay-btn">Pay Now</button>
+</div>
+
+<div class="back">
+  <a href="products.html">⬅ Back to Products</a>
+</div>
+
+</body>
+</html>
