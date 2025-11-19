@@ -1,106 +1,188 @@
 <!doctype html>
 <html lang="en">
 <head>
-   <!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-5W62NPBR');</script>
-<!-- End Google Tag Manager -->
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Pooji Store — Payment</title>
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-
-  <style>
-    :root{
-      --brown:#5b3a29;
-      --beige:#f3ead6;
-      --gold:#c59d5f;
-      --shadow:0 8px 30px rgba(91,58,41,0.12);
-    }
-    body{margin:0;background:var(--beige);font-family:Inter;color:var(--brown);}
-    header{
-      display:flex;justify-content:space-between;align-items:center;padding:20px 40px;
-      background:var(--beige);box-shadow:0 4px 10px rgba(0,0,0,0.05);
-    }
-    nav a{margin-left:18px;text-decoration:none;font-weight:600;color:var(--brown);}
-    h1{text-align:center;font-family:'Playfair Display';margin:20px 0;font-size:40px;}
-    .container{
-      width:90%;max-width:700px;background:white;padding:30px;margin:20px auto;border-radius:20px;box-shadow:var(--shadow);
-    }
-    .field{margin-bottom:20px;}
-    label{font-weight:600;margin-bottom:6px;display:block;}
-    input{width:100%;padding:12px;border-radius:12px;border:1px solid #c8b4a4;font-size:15px;}
-    .pay-btn{
-      width:100%;background:var(--gold);color:white;padding:15px;border:none;border-radius:12px;font-size:18px;font-weight:600;
-      cursor:pointer;box-shadow:0 10px 22px rgba(197,157,95,0.35);
-    }
-    .pay-btn:hover{opacity:0.9;}
-    .payment-img{
-      width:100%;border-radius:16px;margin-bottom:20px;box-shadow:var(--shadow);
-    }
-  </style>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Products — Pooji Book Store</title>
+  <link rel="stylesheet" href="styles.css" />
 </head>
-
 <body>
-   <!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5W62NPBR"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
+  <header class="header container">
+    <div class="brand">
+      <img src="images/logo.png" alt="Pooji logo" />
+      <div>
+        <h1>Pooji Book Store</h1>
+        <div class="small">Books & Coffee</div>
+      </div>
+    </div>
+    <nav class="nav">
+      <a href="index.html">Home</a>
+      <a href="products.html" class="primary">Products</a>
+      <button class="cart-btn" id="openCart">Cart (<span id="cartCount">0</span>)</button>
+    </nav>
+  </header>
 
-<header>
-  <div style="display:flex;align-items:center;gap:10px;font-size:20px;font-weight:700;">
-    <div style="width:45px;height:45px;border-radius:10px;background:var(--brown);color:var(--beige);display:grid;place-items:center;font-family:'Playfair Display';">PS</div>
-    Pooji Store
-  </div>
+  <main class="container">
+    <h2 style="margin:16px 0;">Products</h2>
 
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="products.html">Products</a>
-  </nav>
-</header>
+    <div style="display:flex; gap:12px; margin-bottom:12px; flex-wrap:wrap;">
+      <label>
+        <select id="filterSelect">
+          <option value="">All</option>
+          <option value="Fiction">Fiction</option>
+          <option value="Non-Fiction">Non-Fiction</option>
+          <option value="Children">Children</option>
+          <option value="Mystery">Mystery</option>
+          <option value="Coffee">Coffee</option>
+        </select>
+      </label>
 
-<h1>Checkout & Payment</h1>
-
-<div class="container">
-
-  <img class="payment-img" src="https://images.unsplash.com/photo-1607082349566-187342175e2f?w=1200" alt="Payment Image">
-
-  <div class="field">
-    <label>Full Name</label>
-    <input type="text" placeholder="Enter your name">
-  </div>
-
-  <div class="field">
-    <label>Email Address</label>
-    <input type="email" placeholder="Enter your email">
-  </div>
-
-  <div class="field">
-    <label>Card Number</label>
-    <input type="text" placeholder="XXXX XXXX XXXX XXXX">
-  </div>
-
-  <div class="field" style="display:flex;gap:20px;">
-    <div style="flex:1;">
-      <label>Expiry</label>
-      <input type="text" placeholder="MM/YY">
+      <input id="searchInput" placeholder="Search title..." style="padding:8px 10px; border-radius:8px; border:1px solid #eee;" />
     </div>
 
-    <div style="flex:1;">
-      <label>CVV</label>
-      <input type="password" placeholder="***">
-    </div>
-  </div>
+    <div id="productGrid" class="grid"></div>
 
-  <!-- Redirect to thanku.html -->
-  <button class="pay-btn" onclick="window.location.href='thanku.html'">Pay Now</button>
-</div>
+    <div id="productDetailArea" style="margin-top:18px;"></div>
 
+    <footer class="footer">Pooji Book Store • Click a product to open its product page (detail view).</footer>
+  </main>
+
+  <script>
+    // Sample product data - replace/expand as needed.
+    const PRODUCTS = [
+      { id: 'book1', type:'Book', genre:'Fiction', title:'The Starlit Path', price:349, img:'images/book-fiction-1.jpg', desc:'A touching novel about journeys and home.' },
+      { id: 'book2', type:'Book', genre:'Non-Fiction', title:'Mindful Living', price:299, img:'images/book-nonfiction-1.jpg', desc:'Practical tips for a calmer, focused life.' },
+      { id: 'book3', type:'Book', genre:'Mystery', title:'Shadows on the Lane', price:399, img:'images/book-mystery-1.jpg', desc:'A twisting detective story with surprises.' },
+      { id: 'coffee1', type:'Coffee', genre:'Coffee', title:'House Espresso (250g)', price:599, img:'images/coffee-espresso.jpg', desc:'Rich, chocolatey single-origin espresso.' },
+      { id: 'coffee2', type:'Coffee', genre:'Coffee', title:'Cold Brew Blend (250g)', price:649, img:'images/coffee-coldbrew.jpg', desc:'Smooth cold brew blend with toffee notes.' }
+      // Add more items and images as you upload them to GitHub
+    ];
+
+    const grid = document.getElementById('productGrid');
+    const detailArea = document.getElementById('productDetailArea');
+
+    function renderGrid(filter='', query=''){
+      grid.innerHTML = '';
+      const items = PRODUCTS.filter(p => {
+        if(filter && p.genre !== filter && (filter !== 'Coffee' || p.genre!=='Coffee')) return false;
+        if(query && !p.title.toLowerCase().includes(query.toLowerCase())) return false;
+        return true;
+      });
+      if(items.length === 0){
+        grid.innerHTML = '<div style="padding:20px; color:var(--muted)">No products match.</div>';
+        return;
+      }
+      items.forEach(p => {
+        const card = document.createElement('div');
+        card.className = 'card';
+        card.innerHTML = `
+          <img src="${p.img}" alt="${p.title}">
+          <div class="card-body">
+            <h3>${p.title}</h3>
+            <p class="small">${p.desc}</p>
+            <div class="meta">
+              <div class="small">₹ ${p.price}</div>
+              <div style="display:flex; gap:8px;">
+                <a class="btn btn-outline" href="products.html?id=${p.id}">View</a>
+                <button class="btn btn-primary" data-add="${p.id}">Add to Cart</button>
+              </div>
+            </div>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    // show product detail if URL contains ?id=...
+    function showProductDetail(productId){
+      const p = PRODUCTS.find(x => x.id === productId);
+      if(!p) {
+        detailArea.innerHTML = '';
+        return;
+      }
+      detailArea.innerHTML = `
+        <div class="product-detail">
+          <div class="pd-image">
+            <img src="${p.img}" alt="${p.title}" style="width:100%; height:420px; object-fit:cover;">
+          </div>
+          <div class="pd-content">
+            <h2>${p.title}</h2>
+            <div class="small" style="margin-bottom:10px;">${p.type} • ${p.genre}</div>
+            <p style="color:var(--muted)">${p.desc}</p>
+            <div style="margin-top:14px; display:flex; gap:12px; align-items:center;">
+              <div style="font-weight:900; font-size:1.2rem;">₹ ${p.price}</div>
+              <div style="margin-left:auto;">
+                <button class="btn btn-primary" id="buyNow">Buy Now</button>
+                <button class="btn btn-outline" id="addNow">Add to Cart</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+
+      document.getElementById('addNow').addEventListener('click', ()=>{
+        addToCart(p.id);
+        alert('Added to cart');
+        updateCartCount();
+      });
+      document.getElementById('buyNow').addEventListener('click', ()=>{
+        // redirect to payment with buy param
+        location.href = `payment.html?buy=${p.id}`;
+      });
+      window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+    }
+
+    // add to cart stored in localStorage
+    function addToCart(id){
+      const cart = JSON.parse(localStorage.getItem('pooji_cart') || '[]');
+      cart.push({ id, qty:1 });
+      localStorage.setItem('pooji_cart', JSON.stringify(cart));
+    }
+
+    // handle add from card buttons
+    grid.addEventListener('click', (e)=>{
+      const id = e.target.getAttribute('data-add');
+      if(id){
+        addToCart(id);
+        updateCartCount();
+        alert('Added to cart');
+      }
+    });
+
+    // filters & search
+    document.getElementById('filterSelect').addEventListener('change', (e)=>{
+      const v = e.target.value;
+      const q = document.getElementById('searchInput').value || '';
+      renderGrid(v, q);
+    });
+    document.getElementById('searchInput').addEventListener('input', (e)=>{
+      const q = e.target.value;
+      const v = document.getElementById('filterSelect').value;
+      renderGrid(v, q);
+    });
+
+    // cart count
+    function updateCartCount(){
+      const cart = JSON.parse(localStorage.getItem('pooji_cart') || '[]');
+      document.getElementById('cartCount').innerText = cart.length;
+    }
+    document.getElementById('openCart').addEventListener('click', ()=> location.href = 'payment.html?cart=1');
+
+    // init
+    function init(){
+      const params = new URLSearchParams(location.search);
+      const filter = params.get('filter') || '';
+      const q = params.get('q') || '';
+      renderGrid(filter, q);
+      updateCartCount();
+
+      const id = params.get('id');
+      if(id) showProductDetail(id);
+      // attach click delegation for Buy Now from product list (if any)
+      // (cards have View which navigates to ?id=)
+    }
+
+    init();
+  </script>
 </body>
 </html>
