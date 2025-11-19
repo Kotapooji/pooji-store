@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Payment — Pooji Book Store</title>
+  <title>Thank you — Pooji Book Store</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
@@ -12,170 +12,62 @@
       <img src="images/logo.png" alt="logo" />
       <div>
         <h1>Pooji Book Store</h1>
-        <div class="small">Checkout</div>
+        <div class="small">Thank you!</div>
       </div>
     </div>
     <nav class="nav">
       <a href="index.html">Home</a>
       <a href="products.html">Products</a>
-      <button class="cart-btn" id="openCart">Cart</button>
     </nav>
   </header>
 
-  <main class="container">
-    <h2>Payment & Customer Details</h2>
+  <main class="container center" style="padding:40px 20px;">
+    <div class="form-card" style="max-width:720px; margin:0 auto;">
+      <h2>Thank you for your order!</h2>
+      <p class="small" style="margin-top:8px;">We received your order and will start preparing it shortly.</p>
 
-    <div style="display:grid; grid-template-columns: 1fr 360px; gap:18px; margin-top:12px;">
-      <div class="form-card">
-        <form id="paymentForm">
-          <label for="name">Full name</label>
-          <input type="text" id="name" required placeholder="Your name">
+      <div id="orderSummary" style="margin-top:18px;"></div>
 
-          <label for="email">Email</label>
-          <input type="email" id="email" required placeholder="you@example.com">
-
-          <label for="phone">Phone</label>
-          <input type="tel" id="phone" required placeholder="+91 9XXXXXXXXX">
-
-          <label for="address">Address</label>
-          <textarea id="address" rows="3" required placeholder="Address, city, pin code"></textarea>
-
-          <label for="paymentMethod">Payment method</label>
-          <select id="paymentMethod">
-            <option>Card</option>
-            <option>UPI</option>
-            <option>Netbanking</option>
-          </select>
-
-          <label for="card">Card number (simulated)</label>
-          <input type="text" id="card" placeholder="4111 1111 1111 1111">
-
-          <div style="margin-top:14px;">
-            <button class="btn btn-primary" type="submit">Pay & Confirm</button>
-            <a href="products.html" class="btn btn-outline" style="margin-left:8px;">Continue Shopping</a>
-          </div>
-        </form>
+      <div style="margin-top:18px;">
+        <a href="index.html" class="btn btn-outline">Back to home</a>
       </div>
 
-      <div class="form-card">
-        <h3>Order summary</h3>
-        <div id="orderList" style="margin-top:12px;"></div>
-        <hr style="margin:12px 0;">
-        <div style="display:flex; justify-content:space-between; font-weight:800;">
-          <div>Total</div>
-          <div id="totalAmt">₹ 0</div>
-        </div>
-      </div>
+      <div style="margin-top:12px; color:var(--muted)">You will be redirected to the homepage in <span id="count">8</span> seconds...</div>
     </div>
   </main>
 
   <script>
-    // product data must match products.html; duplicate here for simplicity
-    const PRODUCTS = [
-      { id: 'book1', type:'Book', genre:'Fiction', title:'The Starlit Path', price:349, img:'images/book-fiction-1.jpg' },
-      { id: 'book2', type:'Book', genre:'Non-Fiction', title:'Mindful Living', price:299, img:'images/book-nonfiction-1.jpg' },
-      { id: 'book3', type:'Book', genre:'Mystery', title:'Shadows on the Lane', price:399, img:'images/book-mystery-1.jpg' },
-      { id: 'coffee1', type:'Coffee', genre:'Coffee', title:'House Espresso (250g)', price:599, img:'images/coffee-espresso.jpg' },
-      { id: 'coffee2', type:'Coffee', genre:'Coffee', title:'Cold Brew Blend (250g)', price:649, img:'images/coffee-coldbrew.jpg' }
-    ];
-
-    const params = new URLSearchParams(location.search);
-    const buyId = params.get('buy');
-    const cartCheckout = params.get('cart');
-
-    // build order list
-    function getCartProducts(){
-      if(buyId){
-        const p = PRODUCTS.find(x => x.id === buyId);
-        return p ? [{...p, qty:1}] : [];
-      } else if(cartCheckout){
-        const cart = JSON.parse(localStorage.getItem('pooji_cart') || '[]');
-        // collapse quantities
-        const map = {};
-        cart.forEach(item => {
-          map[item.id] = (map[item.id] || 0) + (item.qty || 1);
-        });
-        return Object.keys(map).map(id => {
-          const p = PRODUCTS.find(x => x.id === id);
-          return p ? {...p, qty: map[id]} : null;
-        }).filter(Boolean);
-      } else {
-        // if neither present, allow checkout of cart
-        const cart = JSON.parse(localStorage.getItem('pooji_cart') || '[]');
-        if(cart.length === 0) return [];
-        const map = {};
-        cart.forEach(item => { map[item.id] = (map[item.id] || 0) + (item.qty || 1); });
-        return Object.keys(map).map(id => {
-          const p = PRODUCTS.find(x => x.id === id);
-          return p ? {...p, qty: map[id]} : null;
-        }).filter(Boolean);
-      }
+    const orderStr = localStorage.getItem('pooji_last_order');
+    const el = document.getElementById('orderSummary');
+    if(orderStr){
+      const order = JSON.parse(orderStr);
+      el.innerHTML = `
+        <div style="text-align:left;">
+          <strong>Order ID:</strong> ${order.id}<br/>
+          <strong>Name:</strong> ${order.customer.name}<br/>
+          <strong>Email:</strong> ${order.customer.email}<br/>
+          <strong>Address:</strong> ${order.customer.address}<br/>
+          <hr style="margin:8px 0;">
+          <div><strong>Items:</strong></div>
+          ${order.items.map(i => `<div style="display:flex; justify-content:space-between; margin:6px 0;"><div>${i.title} <span class="small">x${i.qty||1}</span></div><div>₹ ${i.price * (i.qty||1)}</div></div>`).join('')}
+          <hr>
+          <div style="display:flex; justify-content:space-between; font-weight:900;"><div>Total</div><div>${order.total}</div></div>
+        </div>
+      `;
+    } else {
+      el.innerHTML = `<div style="color:var(--muted)">No order data found. If you just paid, your browser may have cleared local data.</div>`;
     }
 
-    function renderOrder(){
-      const listEl = document.getElementById('orderList');
-      const items = getCartProducts();
-      listEl.innerHTML = '';
-      if(items.length === 0){
-        listEl.innerHTML = '<div style="color:var(--muted)">No items. Add products from the <a href="products.html">Products</a> page.</div>';
-        document.getElementById('totalAmt').innerText = '₹ 0';
-        return;
+    // redirect timer
+    let t = 8;
+    const countEl = document.getElementById('count');
+    const timer = setInterval(()=>{
+      t--; countEl.innerText = t;
+      if(t <= 0){
+        clearInterval(timer);
+        location.href = 'index.html';
       }
-      let total = 0;
-      items.forEach(it => {
-        total += it.price * (it.qty || 1);
-        const el = document.createElement('div');
-        el.style.display = 'flex';
-        el.style.gap = '10px';
-        el.style.marginBottom = '10px';
-        el.innerHTML = `
-          <img src="${it.img}" style="width:64px; height:64px; object-fit:cover; border-radius:8px;">
-          <div style="flex:1;">
-            <div style="font-weight:700">${it.title}</div>
-            <div class="small">${it.qty || 1} × ₹ ${it.price}</div>
-          </div>
-          <div style="font-weight:800">₹ ${it.price * (it.qty || 1)}</div>
-        `;
-        listEl.appendChild(el);
-      });
-      document.getElementById('totalAmt').innerText = '₹ ' + total;
-    }
-
-    document.getElementById('paymentForm').addEventListener('submit', (e)=>{
-      e.preventDefault();
-      const name = document.getElementById('name').value.trim();
-      const email = document.getElementById('email').value.trim();
-      const phone = document.getElementById('phone').value.trim();
-      const address = document.getElementById('address').value.trim();
-      if(!name || !email || !phone || !address){
-        alert('Please fill all required details');
-        return;
-      }
-      const items = getCartProducts();
-      if(items.length === 0){
-        alert('No items to purchase.');
-        return;
-      }
-      // create a simple order object and save to localStorage (simulate server)
-      const order = {
-        id: 'ORD' + Date.now(),
-        customer: { name, email, phone, address },
-        items,
-        total: document.getElementById('totalAmt').innerText,
-        createdAt: new Date().toISOString()
-      };
-      localStorage.setItem('pooji_last_order', JSON.stringify(order));
-      // if we checked out cart, clear cart
-      if(!buyId){
-        localStorage.removeItem('pooji_cart');
-      }
-      // redirect to thank you page
-      location.href = 'thankyou.html';
-    });
-
-    document.getElementById('openCart').addEventListener('click', ()=> location.href = 'payment.html?cart=1');
-
-    renderOrder();
+    }, 1000);
   </script>
 </body>
 </html>
