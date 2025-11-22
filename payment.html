@@ -3,186 +3,226 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Products — Pooji Book Store</title>
-  <link rel="stylesheet" href="styles.css" />
+  <title>Checkout — Pooji Book Store</title>
+  <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-  <header class="header container">
-    <div class="brand">
-      <img src="images/logo.png" alt="Pooji logo" />
+  <header class="container header">
+    <a class="brand" href="index.html">
+      <img src="images/logo.png" alt="logo">
       <div>
         <h1>Pooji Book Store</h1>
-        <div class="small">Books & Coffee</div>
+        <div class="small">Secure demo checkout</div>
       </div>
-    </div>
+    </a>
     <nav class="nav">
-      <a href="index.html">Home</a>
-      <a href="products.html" class="primary">Products</a>
-      <button class="cart-btn" id="openCart">Cart (<span id="cartCount">0</span>)</button>
+      <a class="btn" href="products.html">Back to Products</a>
     </nav>
   </header>
 
   <main class="container">
-    <h2 style="margin:16px 0;">Products</h2>
+    <section class="center">
+      <h2>Payment & Delivery Details</h2>
+      <p class="small">
+        This is a <strong>mock payment</strong> for your project. Card details are only used for front-end validation and not actually processed.
+      </p>
+    </section>
 
-    <div style="display:flex; gap:12px; margin-bottom:12px; flex-wrap:wrap;">
-      <label>
-        <select id="filterSelect">
-          <option value="">All</option>
-          <option value="Fiction">Fiction</option>
-          <option value="Non-Fiction">Non-Fiction</option>
-          <option value="Children">Children</option>
-          <option value="Mystery">Mystery</option>
-          <option value="Coffee">Coffee</option>
-        </select>
-      </label>
+    <section class="form-card" aria-labelledby="checkout-title">
+      <h3 id="checkout-title">Customer & Payment Info</h3>
 
-      <input id="searchInput" placeholder="Search title..." style="padding:8px 10px; border-radius:8px; border:1px solid #eee;" />
-    </div>
+      <form id="checkoutForm">
+        <div class="form-grid" style="margin-top:12px;">
+          <!-- Customer info -->
+          <input class="input" name="firstName" placeholder="First name" required>
+          <input class="input" name="lastName" placeholder="Last name" required>
 
-    <div id="productGrid" class="grid"></div>
+          <input class="input" type="email" name="email" placeholder="Email" required>
+          <input class="input" type="tel" name="phone" placeholder="Phone number" required>
 
-    <div id="productDetailArea" style="margin-top:18px;"></div>
+          <input class="input full" name="address" placeholder="Street address" required>
+          <input class="input" name="city" placeholder="City" required>
+          <input class="input" name="state" placeholder="State / Region" required>
+          <input class="input" name="zip" placeholder="Postal code" required>
 
-    <footer class="footer">Pooji Book Store • Click a product to open its product page (detail view).</footer>
-  </main>
-
-  <script>
-    // Sample product data - replace/expand as needed.
-    const PRODUCTS = [
-      { id: 'book1', type:'Book', genre:'Fiction', title:'The Starlit Path', price:349, img:'images/book-fiction-1.jpg', desc:'A touching novel about journeys and home.' },
-      { id: 'book2', type:'Book', genre:'Non-Fiction', title:'Mindful Living', price:299, img:'images/book-nonfiction-1.jpg', desc:'Practical tips for a calmer, focused life.' },
-      { id: 'book3', type:'Book', genre:'Mystery', title:'Shadows on the Lane', price:399, img:'images/book-mystery-1.jpg', desc:'A twisting detective story with surprises.' },
-      { id: 'coffee1', type:'Coffee', genre:'Coffee', title:'House Espresso (250g)', price:599, img:'images/coffee-espresso.jpg', desc:'Rich, chocolatey single-origin espresso.' },
-      { id: 'coffee2', type:'Coffee', genre:'Coffee', title:'Cold Brew Blend (250g)', price:649, img:'images/coffee-coldbrew.jpg', desc:'Smooth cold brew blend with toffee notes.' }
-      // Add more items and images as you upload them to GitHub
-    ];
-
-    const grid = document.getElementById('productGrid');
-    const detailArea = document.getElementById('productDetailArea');
-
-    function renderGrid(filter='', query=''){
-      grid.innerHTML = '';
-      const items = PRODUCTS.filter(p => {
-        if(filter && p.genre !== filter && (filter !== 'Coffee' || p.genre!=='Coffee')) return false;
-        if(query && !p.title.toLowerCase().includes(query.toLowerCase())) return false;
-        return true;
-      });
-      if(items.length === 0){
-        grid.innerHTML = '<div style="padding:20px; color:var(--muted)">No products match.</div>';
-        return;
-      }
-      items.forEach(p => {
-        const card = document.createElement('div');
-        card.className = 'card';
-        card.innerHTML = `
-          <img src="${p.img}" alt="${p.title}">
-          <div class="card-body">
-            <h3>${p.title}</h3>
-            <p class="small">${p.desc}</p>
-            <div class="meta">
-              <div class="small">₹ ${p.price}</div>
-              <div style="display:flex; gap:8px;">
-                <a class="btn btn-outline" href="products.html?id=${p.id}">View</a>
-                <button class="btn btn-primary" data-add="${p.id}">Add to Cart</button>
-              </div>
+          <!-- Payment method selector -->
+          <div class="full">
+            <label class="small">Payment method (mock)</label>
+            <div class="payment-methods">
+              <label>
+                <input type="radio" name="paymentMethod" value="card" checked>
+                Card
+              </label>
+              <label>
+                <input type="radio" name="paymentMethod" value="upi">
+                UPI
+              </label>
+              <label>
+                <input type="radio" name="paymentMethod" value="cod">
+                Cash on delivery
+              </label>
             </div>
           </div>
-        `;
-        grid.appendChild(card);
-      });
-    }
 
-    // show product detail if URL contains ?id=...
-    function showProductDetail(productId){
-      const p = PRODUCTS.find(x => x.id === productId);
-      if(!p) {
-        detailArea.innerHTML = '';
-        return;
-      }
-      detailArea.innerHTML = `
-        <div class="product-detail">
-          <div class="pd-image">
-            <img src="${p.img}" alt="${p.title}" style="width:100%; height:420px; object-fit:cover;">
-          </div>
-          <div class="pd-content">
-            <h2>${p.title}</h2>
-            <div class="small" style="margin-bottom:10px;">${p.type} • ${p.genre}</div>
-            <p style="color:var(--muted)">${p.desc}</p>
-            <div style="margin-top:14px; display:flex; gap:12px; align-items:center;">
-              <div style="font-weight:900; font-size:1.2rem;">₹ ${p.price}</div>
-              <div style="margin-left:auto;">
-                <button class="btn btn-primary" id="buyNow">Buy Now</button>
-                <button class="btn btn-outline" id="addNow">Add to Cart</button>
-              </div>
+          <!-- Card details (shown when "card" is selected) -->
+          <div class="card-section full" id="cardSection">
+            <h4>Card details (mock)</h4>
+            <input class="input full-mobile" name="cardName" id="cardName" placeholder="Name on card">
+            <div class="card-row">
+              <input class="input full-mobile" name="cardNumber" id="cardNumber" maxlength="19" placeholder="Card number (16 digits)">
+              <input class="input" name="cardExpiry" id="cardExpiry" placeholder="MM/YY">
+              <input class="input" name="cardCvv" id="cardCvv" placeholder="CVV">
             </div>
+            <div class="secure-note">
+              <span class="badge-secure">Mock • For demo only</span>
+              Your card details are not sent to any server. They are only validated in the browser.
+            </div>
+          </div>
+
+          <!-- Notes -->
+          <textarea class="input full" name="notes" placeholder="Order notes (optional)"></textarea>
+        </div>
+
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-top:14px;gap:10px;flex-wrap:wrap;">
+          <div class="small">
+            Cart items: <span id="cartItems">0</span><br>
+            <span id="selectedProduct" class="small"></span>
+          </div>
+          <div>
+            <button type="button" class="btn secondary" id="backProducts">Back</button>
+            <button type="submit" class="btn" id="payButton">Pay &amp; Place Order</button>
           </div>
         </div>
-      `;
 
-      document.getElementById('addNow').addEventListener('click', ()=>{
-        addToCart(p.id);
-        alert('Added to cart');
-        updateCartCount();
-      });
-      document.getElementById('buyNow').addEventListener('click', ()=>{
-        // redirect to payment with buy param
-        location.href = `payment.html?buy=${p.id}`;
-      });
-      window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+        <div class="small" id="statusMessage" style="margin-top:8px;"></div>
+      </form>
+    </section>
+  </main>
+
+  <footer class="container footer">
+    <div class="small">© Pooji Book Store</div>
+    <div class="small">Demo checkout for project</div>
+  </footer>
+
+<script>
+  // Show cart count
+  function updateCartUI(){
+    const count = Number(localStorage.getItem('pooji_cart') || 0);
+    document.getElementById('cartItems').textContent = count;
+  }
+  updateCartUI();
+
+  // Read product from URL if coming from "Buy Now"
+  const urlParams = new URLSearchParams(location.search);
+  const productParam = urlParams.get('product') || null;
+  const productTextEl = document.getElementById('selectedProduct');
+  if(productParam){
+    productTextEl.textContent = 'Selected item: ' + productParam;
+  }else{
+    productTextEl.textContent = 'Selected item: Cart items';
+  }
+
+  // Payment method toggle
+  const methodRadios = document.querySelectorAll('input[name="paymentMethod"]');
+  const cardSection = document.getElementById('cardSection');
+
+  function updatePaymentVisibility(){
+    let method = 'card';
+    methodRadios.forEach(radio => { if(radio.checked) method = radio.value; });
+    if(method === 'card'){
+      cardSection.style.display = 'block';
+    }else{
+      cardSection.style.display = 'none';
+    }
+  }
+  methodRadios.forEach(r => r.addEventListener('change', updatePaymentVisibility));
+  updatePaymentVisibility();
+
+  // Simple card validation (front-end only, fake)
+  function validateCardFields(){
+    const number = document.getElementById('cardNumber').value.replace(/\s+/g,'');
+    const name   = document.getElementById('cardName').value.trim();
+    const expiry = document.getElementById('cardExpiry').value.trim();
+    const cvv    = document.getElementById('cardCvv').value.trim();
+
+    if(!name){
+      alert('Please enter name on card.');
+      return false;
+    }
+    if(!/^\d{16}$/.test(number)){
+      alert('Please enter a valid 16-digit card number (for demo).');
+      return false;
+    }
+    if(!/^\d{2}\/\d{2}$/.test(expiry)){
+      alert('Expiry should be in MM/YY format.');
+      return false;
+    }
+    const [mmStr, yyStr] = expiry.split('/');
+    const mm = Number(mmStr), yy = Number(yyStr);
+    if(mm < 1 || mm > 12){
+      alert('Please enter a valid expiry month.');
+      return false;
     }
 
-    // add to cart stored in localStorage
-    function addToCart(id){
-      const cart = JSON.parse(localStorage.getItem('pooji_cart') || '[]');
-      cart.push({ id, qty:1 });
-      localStorage.setItem('pooji_cart', JSON.stringify(cart));
+    if(!/^\d{3,4}$/.test(cvv)){
+      alert('CVV should be 3 or 4 digits.');
+      return false;
     }
 
-    // handle add from card buttons
-    grid.addEventListener('click', (e)=>{
-      const id = e.target.getAttribute('data-add');
-      if(id){
-        addToCart(id);
-        updateCartCount();
-        alert('Added to cart');
+    return true;
+  }
+
+  // Submit handler: mock payment simulation then redirect
+  document.getElementById('checkoutForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    const form = e.target;
+    const payButton = document.getElementById('payButton');
+    const statusEl = document.getElementById('statusMessage');
+
+    // Basic required fields
+    if(!form.firstName.value.trim() || !form.email.value.trim()){
+      alert('Please fill in all required details (name & email).');
+      return;
+    }
+
+    // Read method
+    let method = 'card';
+    methodRadios.forEach(radio => { if(radio.checked) method = radio.value; });
+
+    // If card, run fake card validation
+    if(method === 'card'){
+      if(!validateCardFields()){
+        return;
       }
-    });
-
-    // filters & search
-    document.getElementById('filterSelect').addEventListener('change', (e)=>{
-      const v = e.target.value;
-      const q = document.getElementById('searchInput').value || '';
-      renderGrid(v, q);
-    });
-    document.getElementById('searchInput').addEventListener('input', (e)=>{
-      const q = e.target.value;
-      const v = document.getElementById('filterSelect').value;
-      renderGrid(v, q);
-    });
-
-    // cart count
-    function updateCartCount(){
-      const cart = JSON.parse(localStorage.getItem('pooji_cart') || '[]');
-      document.getElementById('cartCount').innerText = cart.length;
-    }
-    document.getElementById('openCart').addEventListener('click', ()=> location.href = 'payment.html?cart=1');
-
-    // init
-    function init(){
-      const params = new URLSearchParams(location.search);
-      const filter = params.get('filter') || '';
-      const q = params.get('q') || '';
-      renderGrid(filter, q);
-      updateCartCount();
-
-      const id = params.get('id');
-      if(id) showProductDetail(id);
-      // attach click delegation for Buy Now from product list (if any)
-      // (cards have View which navigates to ?id=)
     }
 
-    init();
-  </script>
+    // Simulate processing
+    payButton.disabled = true;
+    const originalText = payButton.textContent;
+    payButton.textContent = 'Processing...';
+    statusEl.textContent = 'Simulating payment… This is just for demo, no real money is charged.';
+
+    // Build a fake order summary
+    const order = {
+      id: 'POOJI-' + Date.now(),
+      name: form.firstName.value.trim() + (form.lastName.value ? (' ' + form.lastName.value.trim()) : ''),
+      email: form.email.value.trim(),
+      product: productParam || 'Cart items',
+      method: method.toUpperCase(),
+      timestamp: new Date().toISOString()
+    };
+    localStorage.setItem('pooji_last_order', JSON.stringify(order));
+    localStorage.removeItem('pooji_cart'); // clear cart
+
+    // After 1.5s, "payment success" → thankyou.html
+    setTimeout(()=>{
+      window.location.href = 'thankyou.html';
+    }, 1500);
+  });
+
+  document.getElementById('backProducts').addEventListener('click', ()=>{
+    location.href = 'products.html';
+  });
+</script>
 </body>
 </html>
