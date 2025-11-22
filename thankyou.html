@@ -4,70 +4,60 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Thank you — Pooji Book Store</title>
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-  <header class="header container">
-    <div class="brand">
-      <img src="images/logo.png" alt="logo" />
+  <header class="container header">
+    <a class="brand" href="index.html">
+      <img src="images/logo.png" alt="logo">
       <div>
         <h1>Pooji Book Store</h1>
-        <div class="small">Thank you!</div>
+        <div class="small">Thank you for your order</div>
       </div>
-    </div>
-    <nav class="nav">
-      <a href="index.html">Home</a>
-      <a href="products.html">Products</a>
-    </nav>
+    </a>
   </header>
 
-  <main class="container center" style="padding:40px 20px;">
-    <div class="form-card" style="max-width:720px; margin:0 auto;">
-      <h2>Thank you for your order!</h2>
-      <p class="small" style="margin-top:8px;">We received your order and will start preparing it shortly.</p>
+  <main class="container center">
+    <div style="max-width:760px;margin:28px auto;">
+      <div class="form-card">
+        <h2>Thank you for your order ✨</h2>
+        <p class="small" id="thankText" style="margin-top:10px;">
+          Processing your order now — we appreciate you.
+        </p>
 
-      <div id="orderSummary" style="margin-top:18px;"></div>
+        <div style="display:flex;gap:12px;justify-content:center;margin-top:18px;flex-wrap:wrap;">
+          <a class="btn" id="backHome" href="index.html">Back to Home</a>
+          <a class="btn secondary" id="viewOrder" href="#">View Order</a>
+        </div>
 
-      <div style="margin-top:18px;">
-        <a href="index.html" class="btn btn-outline">Back to home</a>
+        <p class="small" style="margin-top:10px;">
+          You’ll be automatically redirected to the home page in a few seconds.
+        </p>
       </div>
-
-      <div style="margin-top:12px; color:var(--muted)">You will be redirected to the homepage in <span id="count">8</span> seconds...</div>
     </div>
   </main>
 
-  <script>
-    const orderStr = localStorage.getItem('pooji_last_order');
-    const el = document.getElementById('orderSummary');
-    if(orderStr){
-      const order = JSON.parse(orderStr);
-      el.innerHTML = `
-        <div style="text-align:left;">
-          <strong>Order ID:</strong> ${order.id}<br/>
-          <strong>Name:</strong> ${order.customer.name}<br/>
-          <strong>Email:</strong> ${order.customer.email}<br/>
-          <strong>Address:</strong> ${order.customer.address}<br/>
-          <hr style="margin:8px 0;">
-          <div><strong>Items:</strong></div>
-          ${order.items.map(i => `<div style="display:flex; justify-content:space-between; margin:6px 0;"><div>${i.title} <span class="small">x${i.qty||1}</span></div><div>₹ ${i.price * (i.qty||1)}</div></div>`).join('')}
-          <hr>
-          <div style="display:flex; justify-content:space-between; font-weight:900;"><div>Total</div><div>${order.total}</div></div>
-        </div>
-      `;
-    } else {
-      el.innerHTML = `<div style="color:var(--muted)">No order data found. If you just paid, your browser may have cleared local data.</div>`;
-    }
+  <footer class="container footer">
+    <div class="small">Pooji Book Store</div>
+    <div class="small">Questions? hello@pooji.example</div>
+  </footer>
 
-    // redirect timer
-    let t = 8;
-    const countEl = document.getElementById('count');
-    const timer = setInterval(()=>{
-      t--; countEl.innerText = t;
-      if(t <= 0){
-        clearInterval(timer);
-        location.href = 'index.html';
-      }
-    }, 1000);
-  </script>
+<script>
+  // Show order info if available
+  const last = localStorage.getItem('pooji_last_order');
+  if(last){
+    try{
+      const order = JSON.parse(last);
+      const text = document.getElementById('thankText');
+      text.innerHTML = `Thanks <strong>${order.name}</strong> — your order <strong>${order.id}</strong> (${order.product}) was placed with <strong>${order.method}</strong> on ${new Date(order.timestamp).toLocaleString()}. We’ll email you at <strong>${order.email}</strong>.`;
+      document.getElementById('viewOrder').href = '#order-' + order.id;
+    }catch(e){}
+  }
+
+  // Auto redirect to home after 10s (can change time)
+  setTimeout(()=> {
+    window.location.href = 'index.html';
+  }, 10000);
+</script>
 </body>
 </html>
