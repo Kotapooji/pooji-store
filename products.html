@@ -7,190 +7,181 @@
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
+
   gtag('config', 'G-CFYJNWF48F');
 </script>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Products — Pooji Book Store</title>
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-  <header class=" header container">
-    <div class="brand">
-      <img src="images/logo.png" alt="Pooji logo" />
-      <div>
-        <h1>Pooji Book Store</h1>
-        <div class="small">Books & Coffee</div>
-      </div>
-    </div>
+  <header class=" container header">
+    <a class="brand" href="index.html">
+      <img src="images/logo.png" alt="logo">
+      <div><h1>Pooji Book Store</h1><div class="small">Books • Coffee • Cozy corners</div></div>
+    </a>
+
     <nav class="nav">
-      <a href="index.html">Home</a>
-      <a href="products.html" class="primary">Products</a>
-      <button class="cart-btn" id="openCart">Cart (<span id="cartCount">0</span>)</button>
+      <a class="btn" href="index.html">Home</a>
+      <a class="btn" href="products.html">Products</a>
+      <a class="btn secondary" id="cartBtn" href="payment.html">Cart / Checkout</a>
+      <div class="cart">
+        <div id="cartCount" class="cart-count" style="display:none">0</div>
+      </div>
     </nav>
   </header>
 
   <main class="container">
-    <h2 style="margin:16px 0;">Products</h2>
+    <section class="center">
+      <h2>Books & Coffee — pick your favourites</h2>
+      <p class="small" style="margin-top:8px;">Click a product and use "Buy Now" to go to checkout or use "Add to Cart".</p>
+    </section>
 
-    <div style="display:flex; gap:12px; margin-bottom:12px; flex-wrap:wrap;">
-      <label>
-        <select id="filterSelect">
-          <option value="">All</option>
-          <option value="Fiction">Fiction</option>
-          <option value="Non-Fiction">Non-Fiction</option>
-          <option value="Children">Children</option>
-          <option value="Mystery">Mystery</option>
-          <option value="Coffee">Coffee</option>
-        </select>
-      </label>
+    <section style="margin-top:18px;" class="products-grid" id="productsGrid">
+      <!-- Product 1 -->
+      <article class="product" data-id="book-1">
+        <img class="thumb" src="images/book-1.jpg" alt="Gentle Fiction">
+        <div class="meta">
+          <div style="display:flex;justify-content:space-between;align-items:center;">
+            <div>
+              <div style="font-weight:700">Gentle Fiction — "Evening Tales"</div>
+              <div class="tags">Fiction • 320 pages</div>
+            </div>
+            <div class="price">₹499</div>
+          </div>
+          <p class="small" style="margin-top:6px;">A warm short-story collection perfect with a latte.</p>
+        </div>
+        <div class="actions">
+          <button class="btn secondary add-cart">Add to Cart</button>
+          <a class="btn" href="payment.html?product=book-1">Buy Now</a>
+        </div>
+      </article>
 
-      <input id="searchInput" placeholder="Search title..." style="padding:8px 10px; border-radius:8px; border:1px solid #eee;" />
-    </div>
+      <!-- Product 2 -->
+      <article class="product" data-id="book-2">
+        <img class="thumb" src="images/book-2.jpg" alt="Practical Self Help">
+        <div class="meta">
+          <div style="display:flex;justify-content:space-between;align-items:center;">
+            <div>
+              <div style="font-weight:700">Growth Guides — "Tiny Wins"</div>
+              <div class="tags">Self-help • 200 pages</div>
+            </div>
+            <div class="price">₹399</div>
+          </div>
+          <p class="small" style="margin-top:6px;">Short exercises to build consistent habits.</p>
+        </div>
+        <div class="actions">
+          <button class="btn secondary add-cart">Add to Cart</button>
+          <a class="btn" href="payment.html?product=book-2">Buy Now</a>
+        </div>
+      </article>
 
-    <div id="productGrid" class="grid"></div>
+      <!-- Product 3 -->
+      <article class="product" data-id="coffee-latte">
+        <img class="thumb" src="images/coffee-1.jpg" alt="Classic Latte">
+        <div class="meta">
+          <div style="display:flex;justify-content:space-between;align-items:center;">
+            <div>
+              <div style="font-weight:700">Classic Latte (Hot)</div>
+              <div class="tags">Coffee • 250ml</div>
+            </div>
+            <div class="price">₹149</div>
+          </div>
+          <p class="small" style="margin-top:6px;">Silky milk with balanced espresso.</p>
+        </div>
+        <div class="actions">
+          <button class="btn secondary add-cart">Add to Cart</button>
+          <a class="btn" href="payment.html?product=coffee-latte">Buy Now</a>
+        </div>
+      </article>
 
-    <div id="productDetailArea" style="margin-top:18px;"></div>
+      <!-- Product 4 -->
+      <article class="product" data-id="scifi-1">
+        <img class="thumb" src="images/book-3.jpg" alt="Sci-Fi novel">
+        <div class="meta">
+          <div style="display:flex;justify-content:space-between;align-items:center;">
+            <div>
+              <div style="font-weight:700">Stellar Journey — Sci-Fi</div>
+              <div class="tags">Sci-Fi • 420 pages</div>
+            </div>
+            <div class="price">₹599</div>
+          </div>
+          <p class="small" style="margin-top:6px;">A fast-paced interstellar adventure.</p>
+        </div>
+        <div class="actions">
+          <button class="btn secondary add-cart">Add to Cart</button>
+          <a class="btn" href="payment.html?product=scifi-1">Buy Now</a>
+        </div>
+      </article>
 
-    <footer class="footer">Pooji Book Store • Click a product to open its product page (detail view).</footer>
+      <!-- Coffee variants -->
+      <article class="product" data-id="coffee-2">
+        <img class="thumb" src="images/coffee-2.jpg" alt="Cold brew">
+        <div class="meta">
+          <div style="display:flex;justify-content:space-between;align-items:center;">
+            <div>
+              <div style="font-weight:700">Cold Brew</div>
+              <div class="tags">Coffee • 300ml</div>
+            </div>
+            <div class="price">₹179</div>
+          </div>
+          <p class="small" style="margin-top:6px;">Smooth and slow-brewed.</p>
+        </div>
+        <div class="actions">
+          <button class="btn secondary add-cart">Add to Cart</button>
+          <a class="btn" href="payment.html?product=coffee-2">Buy Now</a>
+        </div>
+      </article>
+
+      <article class="product" data-id="book-4">
+        <img class="thumb" src="images/book-1.jpg" alt="Book bundle">
+        <div class="meta">
+          <div style="display:flex;justify-content:space-between;align-items:center;">
+            <div>
+              <div style="font-weight:700">Curated Bundle</div>
+              <div class="tags">Bundle • 3 books</div>
+            </div>
+            <div class="price">₹999</div>
+          </div>
+          <p class="small" style="margin-top:6px;">Perfect starter bundle for new readers.</p>
+        </div>
+        <div class="actions">
+          <button class="btn secondary add-cart">Add to Cart</button>
+          <a class="btn" href="payment.html?product=book-4">Buy Now</a>
+        </div>
+      </article>
+    </section>
   </main>
 
-  <script>
-    // Sample product data - replace/expand as needed.
-    const PRODUCTS = [
-      { id: 'book1', type:'Book', genre:'Fiction', title:'The Starlit Path', price:349, img:'images/book-fiction-1.jpg', desc:'A touching novel about journeys and home.' },
-      { id: 'book2', type:'Book', genre:'Non-Fiction', title:'Mindful Living', price:299, img:'images/book-nonfiction-1.jpg', desc:'Practical tips for a calmer, focused life.' },
-      { id: 'book3', type:'Book', genre:'Mystery', title:'Shadows on the Lane', price:399, img:'images/book-mystery-1.jpg', desc:'A twisting detective story with surprises.' },
-      { id: 'coffee1', type:'Coffee', genre:'Coffee', title:'House Espresso (250g)', price:599, img:'images/coffee-espresso.jpg', desc:'Rich, chocolatey single-origin espresso.' },
-      { id: 'coffee2', type:'Coffee', genre:'Coffee', title:'Cold Brew Blend (250g)', price:649, img:'images/coffee-coldbrew.jpg', desc:'Smooth cold brew blend with toffee notes.' }
-      // Add more items and images as you upload them to GitHub
-    ];
+  <footer class="container footer">
+    <div class="small">© Pooji Book Store</div>
+    <div class="small">Need help? Email: hello@pooji.example</div>
+  </footer>
 
-    const grid = document.getElementById('productGrid');
-    const detailArea = document.getElementById('productDetailArea');
-
-    function renderGrid(filter='', query=''){
-      grid.innerHTML = '';
-      const items = PRODUCTS.filter(p => {
-        if(filter && p.genre !== filter && (filter !== 'Coffee' || p.genre!=='Coffee')) return false;
-        if(query && !p.title.toLowerCase().includes(query.toLowerCase())) return false;
-        return true;
-      });
-      if(items.length === 0){
-        grid.innerHTML = '<div style="padding:20px; color:var(--muted)">No products match.</div>';
-        return;
-      }
-      items.forEach(p => {
-        const card = document.createElement('div');
-        card.className = 'card';
-        card.innerHTML = `
-          <img src="${p.img}" alt="${p.title}">
-          <div class="card-body">
-            <h3>${p.title}</h3>
-            <p class="small">${p.desc}</p>
-            <div class="meta">
-              <div class="small">₹ ${p.price}</div>
-              <div style="display:flex; gap:8px;">
-                <a class="btn btn-outline" href="products.html?id=${p.id}">View</a>
-                <button class="btn btn-primary" data-add="${p.id}">Add to Cart</button>
-              </div>
-            </div>
-          </div>
-        `;
-        grid.appendChild(card);
-      });
-    }
-
-    // show product detail if URL contains ?id=...
-    function showProductDetail(productId){
-      const p = PRODUCTS.find(x => x.id === productId);
-      if(!p) {
-        detailArea.innerHTML = '';
-        return;
-      }
-      detailArea.innerHTML = `
-        <div class="product-detail">
-          <div class="pd-image">
-            <img src="${p.img}" alt="${p.title}" style="width:100%; height:420px; object-fit:cover;">
-          </div>
-          <div class="pd-content">
-            <h2>${p.title}</h2>
-            <div class="small" style="margin-bottom:10px;">${p.type} • ${p.genre}</div>
-            <p style="color:var(--muted)">${p.desc}</p>
-            <div style="margin-top:14px; display:flex; gap:12px; align-items:center;">
-              <div style="font-weight:900; font-size:1.2rem;">₹ ${p.price}</div>
-              <div style="margin-left:auto;">
-                <button class="btn btn-primary" id="buyNow">Buy Now</button>
-                <button class="btn btn-outline" id="addNow">Add to Cart</button>
-              </div>
-            </div>
-          </div>
-        </div>
-      `;
-
-      document.getElementById('addNow').addEventListener('click', ()=>{
-        addToCart(p.id);
-        alert('Added to cart');
-        updateCartCount();
-      });
-      document.getElementById('buyNow').addEventListener('click', ()=>{
-        // redirect to payment with buy param
-        location.href = `https://imaginative-eclair-76d3ed.netlify.app/payment.html?cart=1<a class="btn" href="https://imaginative-eclair-76d3ed.netlify.app/https://imaginative-eclair-76d3ed.netlify.app/payment.html?cart=1">Buy Now</a><a class="btn" href="https://imaginative-eclair-76d3ed.netlify.app/https://imaginative-eclair-76d3ed.netlify.app/payment.html?cart=1">Buy Now</a><a class="btn" href="https://imaginative-eclair-76d3ed.netlify.app/https://imaginative-eclair-76d3ed.netlify.app/payment.html?cart=1">Buy Now</a><a class="btn" href="https://imaginative-eclair-76d3ed.netlify.app/https://imaginative-eclair-76d3ed.netlify.app/payment.html?cart=1">Buy Now</a>?cart=1?cart=1?cart=1?cart=1?buy=${p.id}`;
-      });
-      window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
-    }
-
-    // add to cart stored in localStorage
-    function addToCart(id){
-      const cart = JSON.parse(localStorage.getItem('pooji_cart') || '[]');
-      cart.push({ id, qty:1 });
-      localStorage.setItem('pooji_cart', JSON.stringify(cart));
-    }
-
-    // handle add from card buttons
-    grid.addEventListener('click', (e)=>{
-      const id = e.target.getAttribute('data-add');
-      if(id){
-        addToCart(id);
-        updateCartCount();
-        alert('Added to cart');
-      }
+<script>
+  // Add to cart behavior (simple localStorage)
+  const addCartBtns = document.querySelectorAll('.add-cart');
+  function updateCartUI(){
+    const count = Number(localStorage.getItem('pooji_cart') || 0);
+    const el = document.getElementById('cartCount');
+    if(count>0){ el.style.display='block'; el.textContent = count; } else { el.style.display='none'; }
+    // also update cartBtn link to payment.html
+    const cartBtn = document.getElementById('cartBtn');
+    if(cartBtn) cartBtn.href = 'payment.html';
+  }
+  addCartBtns.forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      let count = Number(localStorage.getItem('pooji_cart') || 0);
+      count += 1;
+      localStorage.setItem('pooji_cart', count);
+      updateCartUI();
+      btn.innerText = 'Added';
+      setTimeout(()=> btn.innerText = 'Add to Cart', 900);
     });
-
-    // filters & search
-    document.getElementById('filterSelect').addEventListener('change', (e)=>{
-      const v = e.target.value;
-      const q = document.getElementById('searchInput').value || '';
-      renderGrid(v, q);
-    });
-    document.getElementById('searchInput').addEventListener('input', (e)=>{
-      const q = e.target.value;
-      const v = document.getElementById('filterSelect').value;
-      renderGrid(v, q);
-    });
-
-    // cart count
-    function updateCartCount(){
-      const cart = JSON.parse(localStorage.getItem('pooji_cart') || '[]');
-      document.getElementById('cartCount').innerText = cart.length;
-    }
-    document.getElementById('openCart').addEventListener('click', ()=> location.href = '<a class="btn" href="https://imaginative-eclair-76d3ed.netlify.app/https://imaginative-eclair-76d3ed.netlify.app/payment.html?cart=1">Buy Now</a><a class="btn" href="https://imaginative-eclair-76d3ed.netlify.app/https://imaginative-eclair-76d3ed.netlify.app/payment.html?cart=1">Buy Now</a><a class="btn" href="https://imaginative-eclair-76d3ed.netlify.app/https://imaginative-eclair-76d3ed.netlify.app/payment.html?cart=1">Buy Now</a><a class="btn" href="https://imaginative-eclair-76d3ed.netlify.app/https://imaginative-eclair-76d3ed.netlify.app/payment.html?cart=1">Buy Now</a><a class="btn" href="https://imaginative-eclair-76d3ed.netlify.app/https://imaginative-eclair-76d3ed.netlify.app/payment.html?cart=1">Buy Now</a>?cart=1?cart=1?cart=1?cart=1?cart=1');
-
-    // init
-    function init(){
-      const params = new URLSearchParams(location.search);
-      const filter = params.get('filter') || '';
-      const q = params.get('q') || '';
-      renderGrid(filter, q);
-      updateCartCount();
-
-      const id = params.get('id');
-      if(id) showProductDetail(id);
-      // attach click delegation for Buy Now from product list (if any)
-      // (cards have View which navigates to ?id=)
-    }
-
-    init();
-  </script>
+  });
+  // If user clicks product card itself, we could open product detail - but per requirement Buy Now goes to payment
+  updateCartUI();
+</script>
 </body>
 </html>
