@@ -25,7 +25,7 @@
     <nav class="nav">
       <a class="btn" href="index.html">Home</a>
       <a class="btn" href="products.html">Products</a>
-      <a class="btn secondary" id="cartBtn" href="payment.html">Cart / Checkout</a>
+      <a class="btn secondary" id="cartBtn" href="https://imaginative-eclair-76d3ed.netlify.app/payment.html">Cart / Checkout</a>
       <div class="cart">
         <div id="cartCount" class="cart-count" style="display:none">0</div>
       </div>
@@ -54,7 +54,7 @@
         </div>
         <div class="actions">
           <button class="btn secondary add-cart">Add to Cart</button>
-          <a class="btn" href="payment.html?product=book-1">Buy Now</a>
+          <a class="btn" href="https://imaginative-eclair-76d3ed.netlify.app/payment.html?product=book-1">Buy Now</a>
         </div>
       </article>
 
@@ -73,7 +73,7 @@
         </div>
         <div class="actions">
           <button class="btn secondary add-cart">Add to Cart</button>
-          <a class="btn" href="payment.html?product=book-2">Buy Now</a>
+          <a class="btn" href="https://imaginative-eclair-76d3ed.netlify.app/payment.html?product=book-2">Buy Now</a>
         </div>
       </article>
 
@@ -92,7 +92,7 @@
         </div>
         <div class="actions">
           <button class="btn secondary add-cart">Add to Cart</button>
-          <a class="btn" href="payment.html?product=coffee-latte">Buy Now</a>
+          <a class="btn" href="https://imaginative-eclair-76d3ed.netlify.app/payment.html?product=coffee-latte">Buy Now</a>
         </div>
       </article>
 
@@ -111,7 +111,7 @@
         </div>
         <div class="actions">
           <button class="btn secondary add-cart">Add to Cart</button>
-          <a class="btn" href="payment.html?product=scifi-1">Buy Now</a>
+          <a class="btn" href="https://imaginative-eclair-76d3ed.netlify.app/payment.html?product=scifi-1">Buy Now</a>
         </div>
       </article>
 
@@ -130,7 +130,7 @@
         </div>
         <div class="actions">
           <button class="btn secondary add-cart">Add to Cart</button>
-          <a class="btn" href="payment.html?product=coffee-2">Buy Now</a>
+          <a class="btn" href="https://imaginative-eclair-76d3ed.netlify.app/payment.html?product=coffee-2">Buy Now</a>
         </div>
       </article>
 
@@ -148,7 +148,7 @@
         </div>
         <div class="actions">
           <button class="btn secondary add-cart">Add to Cart</button>
-          <a class="btn" href="payment.html?product=book-4">Buy Now</a>
+          <a class="btn" href="https://imaginative-eclair-76d3ed.netlify.app/payment.html?product=book-4">Buy Now</a>
         </div>
       </article>
     </section>
@@ -166,9 +166,9 @@
     const count = Number(localStorage.getItem('pooji_cart') || 0);
     const el = document.getElementById('cartCount');
     if(count>0){ el.style.display='block'; el.textContent = count; } else { el.style.display='none'; }
-    // also update cartBtn link to payment.html
+    // also update cartBtn link to https://imaginative-eclair-76d3ed.netlify.app/payment.html
     const cartBtn = document.getElementById('cartBtn');
-    if(cartBtn) cartBtn.href = 'payment.html';
+    if(cartBtn) cartBtn.href = 'https://imaginative-eclair-76d3ed.netlify.app/payment.html';
   }
   addCartBtns.forEach(btn=>{
     btn.addEventListener('click', ()=>{
