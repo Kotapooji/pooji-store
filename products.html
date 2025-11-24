@@ -135,7 +135,7 @@
       });
       document.getElementById('buyNow').addEventListener('click', ()=>{
         // redirect to payment with buy param
-        location.href = `payment.html<a class="btn" href="https://imaginative-eclair-76d3ed.netlify.app/payment.html">Buy Now</a><a class="btn" href="https://imaginative-eclair-76d3ed.netlify.app/payment.html">Buy Now</a><a class="btn" href="https://imaginative-eclair-76d3ed.netlify.app/payment.html">Buy Now</a><a class="btn" href="https://imaginative-eclair-76d3ed.netlify.app/payment.html">Buy Now</a>?cart=1?cart=1?cart=1?cart=1?buy=${p.id}`;
+        location.href = `https://imaginative-eclair-76d3ed.netlify.app/payment.html?cart=1<a class="btn" href="https://imaginative-eclair-76d3ed.netlify.app/https://imaginative-eclair-76d3ed.netlify.app/payment.html?cart=1">Buy Now</a><a class="btn" href="https://imaginative-eclair-76d3ed.netlify.app/https://imaginative-eclair-76d3ed.netlify.app/payment.html?cart=1">Buy Now</a><a class="btn" href="https://imaginative-eclair-76d3ed.netlify.app/https://imaginative-eclair-76d3ed.netlify.app/payment.html?cart=1">Buy Now</a><a class="btn" href="https://imaginative-eclair-76d3ed.netlify.app/https://imaginative-eclair-76d3ed.netlify.app/payment.html?cart=1">Buy Now</a>?cart=1?cart=1?cart=1?cart=1?buy=${p.id}`;
       });
       window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
     }
@@ -174,7 +174,7 @@
       const cart = JSON.parse(localStorage.getItem('pooji_cart') || '[]');
       document.getElementById('cartCount').innerText = cart.length;
     }
-    document.getElementById('openCart').addEventListener('click', ()=> location.href = '<a class="btn" href="https://imaginative-eclair-76d3ed.netlify.app/payment.html">Buy Now</a><a class="btn" href="https://imaginative-eclair-76d3ed.netlify.app/payment.html">Buy Now</a><a class="btn" href="https://imaginative-eclair-76d3ed.netlify.app/payment.html">Buy Now</a><a class="btn" href="https://imaginative-eclair-76d3ed.netlify.app/payment.html">Buy Now</a><a class="btn" href="https://imaginative-eclair-76d3ed.netlify.app/payment.html">Buy Now</a>?cart=1?cart=1?cart=1?cart=1?cart=1');
+    document.getElementById('openCart').addEventListener('click', ()=> location.href = '<a class="btn" href="https://imaginative-eclair-76d3ed.netlify.app/https://imaginative-eclair-76d3ed.netlify.app/payment.html?cart=1">Buy Now</a><a class="btn" href="https://imaginative-eclair-76d3ed.netlify.app/https://imaginative-eclair-76d3ed.netlify.app/payment.html?cart=1">Buy Now</a><a class="btn" href="https://imaginative-eclair-76d3ed.netlify.app/https://imaginative-eclair-76d3ed.netlify.app/payment.html?cart=1">Buy Now</a><a class="btn" href="https://imaginative-eclair-76d3ed.netlify.app/https://imaginative-eclair-76d3ed.netlify.app/payment.html?cart=1">Buy Now</a><a class="btn" href="https://imaginative-eclair-76d3ed.netlify.app/https://imaginative-eclair-76d3ed.netlify.app/payment.html?cart=1">Buy Now</a>?cart=1?cart=1?cart=1?cart=1?cart=1');
 
     // init
     function init(){
